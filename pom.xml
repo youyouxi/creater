@@ -9,6 +9,8 @@
     <description>creater 代码生成工具</description>
     <packaging>jar</packaging>
 
+
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -18,9 +20,5 @@
     <dependencies>
 
     </dependencies>
-
-
-
-
 
 </project>
