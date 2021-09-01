@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <version>1.0.0</version>
-    <groupId>com.youyouxi.creater</groupId>
+    <groupId>com.github.youyouxi</groupId>
     <artifactId>creater</artifactId>
     <name>creater</name>
     <url>https://github.com/youyouxi/creater</url>
@@ -50,7 +50,7 @@
     <!-- 使用个人资料：由于生成javadoc和源jar以及使用GPG签署组件是一个相当耗时的过程，因此这些执行通常与正常的构建配置隔离并移动到配置文件中。然后，在通过激活配置文件执行部署时，将使用此配置文件。 -->
     <profiles>
         <profile>
-            <id>oss</id>
+            <id>flybiner</id>
             <build>
                 <plugins>
                     <!-- Source -->
@@ -101,12 +101,13 @@
             <!-- 【注】snapshotRepository 与 repository 中的 id 一定要与 setting.xml 中 server 的 id 保持一致！ -->
             <distributionManagement>
                 <snapshotRepository>
-                    <id>oss</id>
+                    <id>flybiner</id>
                     <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
                 </snapshotRepository>
                 <repository>
-                    <id>oss</id>
+                    <id>flybiner</id>
                     <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                    <uniqueVersion>true</uniqueVersion>
                 </repository>
             </distributionManagement>
         </profile>

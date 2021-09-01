@@ -1,4 +1,4 @@
-package com.youyouxi.creater;
+package com.youyouxi.github.creater;
 
 /**
  * welcome
