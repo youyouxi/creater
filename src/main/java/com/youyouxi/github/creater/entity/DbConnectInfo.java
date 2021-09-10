@@ -1,5 +1,6 @@
 package com.youyouxi.github.creater.entity;
 
+import javax.sound.midi.VoiceStatus;
 import java.io.Serializable;
 
 /**
@@ -81,5 +82,12 @@ public class DbConnectInfo implements Serializable {
                 ", diver='" + diver + '\'' +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public void check() {
+        if (this.url == null || this.diver == null || this.password == null
+                || this.port == null || this.type == null || this.userName == null) {
+            throw new NullPointerException("数据库连接信息为空或者不完善！");
+        }
     }
 }

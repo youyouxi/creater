@@ -4,11 +4,11 @@ import com.mysql.cj.util.StringUtils;
 import com.youyouxi.github.creater.entity.DbConnectInfo;
 
 /**
- * mysql 信息获取构造器
+ * oracle 信息获取构造器
  *
  * @author youyouxi
  */
-public class MysqlConcreteBuilder implements DbBuilder {
+public class OracleConcreteBuilder implements DbBuilder {
 
     private DbConnectInfo dbConnectInfo = new DbConnectInfo();
 
