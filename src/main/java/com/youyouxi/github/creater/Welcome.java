@@ -16,6 +16,7 @@ public class Welcome {
                 .diver("com.mysql.cj.jdbc.Driver")
                 .url("10.211.55.10")
                 .port("3306")
+                .table("flybiner-user")
                 .userName("root")
                 .password("123456")
                 .type("mysql")

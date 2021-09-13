@@ -1,6 +1,5 @@
 package com.youyouxi.github.creater.entity;
 
-import javax.sound.midi.VoiceStatus;
 import java.io.Serializable;
 
 /**
@@ -20,9 +19,12 @@ public class DbConnectInfo implements Serializable {
 
     private String password;
 
+    private String table;
+
     private String diver;
 
     private String type;
+
 
     public String getUrl() {
         return url;
@@ -72,6 +74,14 @@ public class DbConnectInfo implements Serializable {
         this.type = type;
     }
 
+    public String getTable() {
+        return table;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
+    }
+
     @Override
     public String toString() {
         return "DbConnectInfo{" +
@@ -79,6 +89,7 @@ public class DbConnectInfo implements Serializable {
                 ", port='" + port + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", table='" + table + '\'' +
                 ", diver='" + diver + '\'' +
                 ", type='" + type + '\'' +
                 '}';
@@ -86,7 +97,8 @@ public class DbConnectInfo implements Serializable {
 
     public void check() {
         if (this.url == null || this.diver == null || this.password == null
-                || this.port == null || this.type == null || this.userName == null) {
+                || this.port == null || this.type == null || this.userName == null
+                || this.table == null) {
             throw new NullPointerException("数据库连接信息为空或者不完善！");
         }
     }

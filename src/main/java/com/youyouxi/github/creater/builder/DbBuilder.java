@@ -21,6 +21,8 @@ public interface DbBuilder {
 
     DbBuilder type(String type);
 
+    DbBuilder table(String table);
+
     void execute();
 
 }

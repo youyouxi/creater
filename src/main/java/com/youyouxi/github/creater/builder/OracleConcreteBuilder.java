@@ -60,6 +60,10 @@ public class OracleConcreteBuilder implements DbBuilder {
         return this;
     }
 
+    public DbBuilder table(String table) {
+        return null;
+    }
+
     public void execute() {
         dbConnectInfo.check();
         System.out.println("获取数据库信息");
