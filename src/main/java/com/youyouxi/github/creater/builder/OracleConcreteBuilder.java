@@ -2,6 +2,9 @@ package com.youyouxi.github.creater.builder;
 
 import com.mysql.cj.util.StringUtils;
 import com.youyouxi.github.creater.entity.DbConnectInfo;
+import com.youyouxi.github.creater.entity.MysqlTable;
+
+import java.util.List;
 
 /**
  * oracle 信息获取构造器
@@ -64,9 +67,9 @@ public class OracleConcreteBuilder implements DbBuilder {
         return null;
     }
 
-    public void execute() {
+    public List<MysqlTable> execute() {
         dbConnectInfo.check();
         System.out.println("获取数据库信息");
-
+        return null;
     }
 }

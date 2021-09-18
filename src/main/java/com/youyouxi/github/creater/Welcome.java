@@ -14,11 +14,11 @@ public class Welcome {
 
         new MysqlConcreteBuilder()
                 .diver("com.mysql.cj.jdbc.Driver")
-                .url("10.211.55.10")
+                .url("47.95.235.86")
                 .port("3306")
                 .table("flybiner-user")
                 .userName("root")
-                .password("123456")
+                .password("cjb123456")
                 .type("mysql")
                 .execute();
 

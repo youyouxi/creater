@@ -1,5 +1,9 @@
 package com.youyouxi.github.creater.builder;
 
+import com.youyouxi.github.creater.entity.MysqlTable;
+
+import java.util.List;
+
 /**
  * 数据库构造器
  * <p>
@@ -23,6 +27,6 @@ public interface DbBuilder {
 
     DbBuilder table(String table);
 
-    void execute();
+    List<MysqlTable> execute();
 
 }

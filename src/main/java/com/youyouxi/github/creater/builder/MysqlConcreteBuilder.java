@@ -2,10 +2,15 @@ package com.youyouxi.github.creater.builder;
 
 import com.mysql.cj.util.StringUtils;
 import com.youyouxi.github.creater.entity.DbConnectInfo;
+import com.youyouxi.github.creater.entity.MysqlTable;
+import com.youyouxi.github.creater.entity.MysqlTableInfo;
+import com.youyouxi.github.creater.entity.MysqlTableInfoDetail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * mysql 信息获取构造器
@@ -13,6 +18,8 @@ import java.sql.SQLException;
  * @author youyouxi
  */
 public class MysqlConcreteBuilder implements DbBuilder {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MysqlConcreteBuilder.class);
 
     private DbConnectInfo dbConnectInfo = new DbConnectInfo();
 
@@ -75,7 +82,7 @@ public class MysqlConcreteBuilder implements DbBuilder {
         return this;
     }
 
-    public void execute() {
+    public List<MysqlTable> execute() {
         dbConnectInfo.check();
         try {
             String URL = dbConnectInfo.getUrl() + dbConnectInfo.getPort() + dbConnectInfo.getTable() + S2;
@@ -85,12 +92,59 @@ public class MysqlConcreteBuilder implements DbBuilder {
             Class.forName(dbConnectInfo.getDiver());
             // 获得数据库链接
             Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            // 查询数据库表信息
+            Statement tableSt = conn.createStatement();
+            ResultSet tableRe = tableSt.executeQuery(MysqlTableInfo.selectSql(dbConnectInfo.getTable()));
 
+            List<MysqlTableInfo> tableInfos = new ArrayList<MysqlTableInfo>(32);
+            while (tableRe.next()) {
+                MysqlTableInfo tableInfo = new MysqlTableInfo();
+                tableInfo.setTableName(tableRe.getString("table_name"));
+                tableInfo.setTableComment(tableRe.getString("table_comment"));
+                tableInfo.setTableCollation(tableRe.getString("table_collation"));
+                tableInfo.setEngine(tableRe.getString("engine"));
+                tableInfos.add(tableInfo);
+            }
+
+            Statement tableDetailSt = conn.createStatement();
+            ResultSet tableDetailRe = tableSt.executeQuery(MysqlTableInfoDetail.selectSql(dbConnectInfo.getTable()));
+
+            List<MysqlTableInfoDetail> tableInfoDetails = new ArrayList<MysqlTableInfoDetail>(32);
+            while (tableDetailRe.next()) {
+                MysqlTableInfoDetail tableInfoDetail = new MysqlTableInfoDetail();
+                tableInfoDetail.setTableName(tableDetailRe.getString("table_name"));
+                tableInfoDetail.setColumnName(tableDetailRe.getString("column_name"));
+                tableInfoDetail.setOrdinalPosition(tableDetailRe.getString("ordinal_position"));
+                tableInfoDetail.setIsNullAble(tableDetailRe.getString("is_nullable"));
+                tableInfoDetail.setColumnType(tableDetailRe.getString("column_type"));
+                tableInfoDetail.setColumnComment(tableDetailRe.getString("column_comment"));
+                tableInfoDetails.add(tableInfoDetail);
+            }
+
+            List<MysqlTable> mysqlTables = new ArrayList<MysqlTable>(32);
+            tableInfos.forEach(e -> {
+                MysqlTable mysqlTable = new MysqlTable();
+                tableInfoDetails.forEach(x -> {
+                    List<MysqlTableInfoDetail> ary = new ArrayList<>(32);
+                    if (e.getTableName().equals(x.getTableName())) {
+                        ary.add(x);
+                    }
+                    mysqlTable.setTableInfoDetails(ary);
+                });
+                mysqlTable.setTableInfo(e);
+                mysqlTables.add(mysqlTable);
+            });
+
+            LOGGER.info("查询数据库信息===" + mysqlTables);
+
+            tableSt.close();
+            tableDetailSt.close();
             conn.close();
-        } catch (ClassNotFoundException e) {
+            return mysqlTables;
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } catch (SQLException throwAbles) {
-            throwAbles.printStackTrace();
         }
+        throw new NullPointerException("数据库表信息为空");
     }
+
 }
