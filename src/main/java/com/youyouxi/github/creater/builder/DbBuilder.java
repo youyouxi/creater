@@ -25,7 +25,7 @@ public interface DbBuilder {
 
     DbBuilder type(String type);
 
-    DbBuilder table(String table);
+    DbBuilder dataPool(String dataPool);
 
     List<MysqlTable> execute();
 

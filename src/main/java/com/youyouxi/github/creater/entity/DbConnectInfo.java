@@ -19,7 +19,7 @@ public class DbConnectInfo implements Serializable {
 
     private String password;
 
-    private String table;
+    private String dataPool;
 
     private String diver;
 
@@ -74,12 +74,12 @@ public class DbConnectInfo implements Serializable {
         this.type = type;
     }
 
-    public String getTable() {
-        return table;
+    public String getDataPool() {
+        return dataPool;
     }
 
-    public void setTable(String table) {
-        this.table = table;
+    public void setDataPool(String dataPool) {
+        this.dataPool = dataPool;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class DbConnectInfo implements Serializable {
                 ", port='" + port + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", table='" + table + '\'' +
+                ", dataPool='" + dataPool + '\'' +
                 ", diver='" + diver + '\'' +
                 ", type='" + type + '\'' +
                 '}';
@@ -98,7 +98,7 @@ public class DbConnectInfo implements Serializable {
     public void check() {
         if (this.url == null || this.diver == null || this.password == null
                 || this.port == null || this.type == null || this.userName == null
-                || this.table == null) {
+                || this.dataPool == null) {
             throw new NullPointerException("数据库连接信息为空或者不完善！");
         }
     }

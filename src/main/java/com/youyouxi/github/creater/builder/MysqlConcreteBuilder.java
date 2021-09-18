@@ -74,18 +74,18 @@ public class MysqlConcreteBuilder implements DbBuilder {
         return this;
     }
 
-    public DbBuilder table(String table) {
-        if (StringUtils.isNullOrEmpty(table)) {
+    public DbBuilder dataPool(String dataPool) {
+        if (StringUtils.isNullOrEmpty(dataPool)) {
             throw new NullPointerException("数据库连接库名不能为空");
         }
-        dbConnectInfo.setTable(table);
+        dbConnectInfo.setDataPool(dataPool);
         return this;
     }
 
     public List<MysqlTable> execute() {
         dbConnectInfo.check();
         try {
-            String URL = dbConnectInfo.getUrl() + dbConnectInfo.getPort() + dbConnectInfo.getTable() + S2;
+            String URL = dbConnectInfo.getUrl() + dbConnectInfo.getPort() + dbConnectInfo.getDataPool() + S2;
             String USER = dbConnectInfo.getUserName();
             String PASSWORD = dbConnectInfo.getPassword();
             // 加载驱动程序
@@ -94,7 +94,7 @@ public class MysqlConcreteBuilder implements DbBuilder {
             Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
             // 查询数据库表信息
             Statement tableSt = conn.createStatement();
-            ResultSet tableRe = tableSt.executeQuery(MysqlTableInfo.selectSql(dbConnectInfo.getTable()));
+            ResultSet tableRe = tableSt.executeQuery(MysqlTableInfo.selectSql(dbConnectInfo.getDataPool()));
 
             List<MysqlTableInfo> tableInfos = new ArrayList<MysqlTableInfo>(32);
             while (tableRe.next()) {
@@ -107,7 +107,7 @@ public class MysqlConcreteBuilder implements DbBuilder {
             }
 
             Statement tableDetailSt = conn.createStatement();
-            ResultSet tableDetailRe = tableSt.executeQuery(MysqlTableInfoDetail.selectSql(dbConnectInfo.getTable()));
+            ResultSet tableDetailRe = tableSt.executeQuery(MysqlTableInfoDetail.selectSql(dbConnectInfo.getDataPool()));
 
             List<MysqlTableInfoDetail> tableInfoDetails = new ArrayList<MysqlTableInfoDetail>(32);
             while (tableDetailRe.next()) {

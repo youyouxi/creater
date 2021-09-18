@@ -63,7 +63,7 @@ public class OracleConcreteBuilder implements DbBuilder {
         return this;
     }
 
-    public DbBuilder table(String table) {
+    public DbBuilder dataPool(String dataPool) {
         return null;
     }
 
