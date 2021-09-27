@@ -1,7 +1,8 @@
-package com.youyouxi.github.creater.builder;
+package com.youyouxi.github.creater.builder.impl;
 
 import com.mysql.cj.util.StringUtils;
-import com.youyouxi.github.creater.entity.DbConnectInfo;
+import com.youyouxi.github.creater.builder.DbBuilder;
+import com.youyouxi.github.creater.entity.DbCreaterInfo;
 import com.youyouxi.github.creater.entity.MysqlTable;
 
 import java.util.List;
@@ -13,8 +14,9 @@ import java.util.List;
  */
 public class OracleConcreteBuilder implements DbBuilder {
 
-    private DbConnectInfo dbConnectInfo = new DbConnectInfo();
+    private DbCreaterInfo dbConnectInfo = new DbCreaterInfo();
 
+    @Override
     public DbBuilder url(String url) {
         if (StringUtils.isNullOrEmpty(url)) {
             throw new NullPointerException("数据库连接地址不能为空");
@@ -23,6 +25,7 @@ public class OracleConcreteBuilder implements DbBuilder {
         return this;
     }
 
+    @Override
     public DbBuilder port(String port) {
         if (StringUtils.isNullOrEmpty(port)) {
             throw new NullPointerException("数据库连接端口不能为空");
@@ -31,6 +34,7 @@ public class OracleConcreteBuilder implements DbBuilder {
         return this;
     }
 
+    @Override
     public DbBuilder userName(String userName) {
         if (StringUtils.isNullOrEmpty(userName)) {
             throw new NullPointerException("数据库连接端口不能为空");
@@ -39,6 +43,7 @@ public class OracleConcreteBuilder implements DbBuilder {
         return this;
     }
 
+    @Override
     public DbBuilder password(String password) {
         if (StringUtils.isNullOrEmpty(password)) {
             throw new NullPointerException("数据库连接端口不能为空");
@@ -47,6 +52,7 @@ public class OracleConcreteBuilder implements DbBuilder {
         return this;
     }
 
+    @Override
     public DbBuilder diver(String diver) {
         if (StringUtils.isNullOrEmpty(diver)) {
             throw new NullPointerException("数据库连接端口不能为空");
@@ -55,6 +61,7 @@ public class OracleConcreteBuilder implements DbBuilder {
         return this;
     }
 
+    @Override
     public DbBuilder type(String type) {
         if (StringUtils.isNullOrEmpty(type)) {
             throw new NullPointerException("数据库连接端口不能为空");
@@ -63,7 +70,13 @@ public class OracleConcreteBuilder implements DbBuilder {
         return this;
     }
 
+    @Override
     public DbBuilder dataPool(String dataPool) {
+        return null;
+    }
+
+    @Override
+    public DbBuilder table(String table) {
         return null;
     }
 

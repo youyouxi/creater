@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author youyouxi
  */
-public class DbConnectInfo implements Serializable {
+public class DbCreaterInfo implements Serializable {
 
     private static final long serialVersionUID = 3781316901299744393L;
 
@@ -25,6 +25,7 @@ public class DbConnectInfo implements Serializable {
 
     private String type;
 
+    private String table;
 
     public String getUrl() {
         return url;
@@ -82,9 +83,17 @@ public class DbConnectInfo implements Serializable {
         this.dataPool = dataPool;
     }
 
+    public String getTable() {
+        return table;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
+    }
+
     @Override
     public String toString() {
-        return "DbConnectInfo{" +
+        return "DbCreaterInfo{" +
                 "url='" + url + '\'' +
                 ", port='" + port + '\'' +
                 ", userName='" + userName + '\'' +
@@ -92,6 +101,7 @@ public class DbConnectInfo implements Serializable {
                 ", dataPool='" + dataPool + '\'' +
                 ", diver='" + diver + '\'' +
                 ", type='" + type + '\'' +
+                ", table='" + table + '\'' +
                 '}';
     }
 

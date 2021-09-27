@@ -1,6 +1,6 @@
 package com.youyouxi.github.creater;
 
-import com.youyouxi.github.creater.builder.MysqlConcreteBuilder;
+import com.youyouxi.github.creater.builder.impl.MysqlConcreteBuilder;
 import com.youyouxi.github.creater.entity.MysqlTable;
 
 import java.util.List;
