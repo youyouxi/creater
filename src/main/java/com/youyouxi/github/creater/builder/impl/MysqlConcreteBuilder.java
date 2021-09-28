@@ -1,11 +1,9 @@
 package com.youyouxi.github.creater.builder.impl;
 
 import com.mysql.cj.util.StringUtils;
+import com.youyouxi.github.creater.Creater;
 import com.youyouxi.github.creater.builder.DbBuilder;
-import com.youyouxi.github.creater.entity.DbCreaterInfo;
-import com.youyouxi.github.creater.entity.MysqlTable;
-import com.youyouxi.github.creater.entity.MysqlTableInfo;
-import com.youyouxi.github.creater.entity.MysqlTableInfoDetail;
+import com.youyouxi.github.creater.entity.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +21,8 @@ public class MysqlConcreteBuilder implements DbBuilder {
     private static final Logger LOGGER = LoggerFactory.getLogger(MysqlConcreteBuilder.class);
 
     private DbCreaterInfo dbCreaterInfo = new DbCreaterInfo();
+
+    private PersonalConfig personalConfig;
 
     private static final String S1 = "jdbc:mysql://";
     private static final String S2 = "?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
@@ -96,8 +96,17 @@ public class MysqlConcreteBuilder implements DbBuilder {
         return this;
     }
 
+    @Override
+    public DbBuilder personalConfig(PersonalConfig personalConfig) {
+        this.personalConfig = personalConfig;
+        return this;
+    }
+
     public List<MysqlTable> execute() {
+        // 数据库 连接参数校验
         dbCreaterInfo.check();
+        // 初始化 个性化配置
+        personalConfig.checkAndInit();
         try {
             String URL = dbCreaterInfo.getUrl() + dbCreaterInfo.getPort() + dbCreaterInfo.getDataPool() + S2;
             String USER = dbCreaterInfo.getUserName();
@@ -144,6 +153,7 @@ public class MysqlConcreteBuilder implements DbBuilder {
             // 关闭数据库连接
             conn.close();
             // 执行生成代码操作
+            Creater.create(mysqlTables, personalConfig);
 
             return mysqlTables;
         } catch (ClassNotFoundException | SQLException e) {

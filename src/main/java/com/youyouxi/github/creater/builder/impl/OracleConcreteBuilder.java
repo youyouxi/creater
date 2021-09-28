@@ -4,6 +4,7 @@ import com.mysql.cj.util.StringUtils;
 import com.youyouxi.github.creater.builder.DbBuilder;
 import com.youyouxi.github.creater.entity.DbCreaterInfo;
 import com.youyouxi.github.creater.entity.MysqlTable;
+import com.youyouxi.github.creater.entity.PersonalConfig;
 
 import java.util.List;
 
@@ -77,6 +78,11 @@ public class OracleConcreteBuilder implements DbBuilder {
 
     @Override
     public DbBuilder table(String table) {
+        return null;
+    }
+
+    @Override
+    public DbBuilder personalConfig(PersonalConfig personalConfig) {
         return null;
     }
 

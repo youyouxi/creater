@@ -1,6 +1,7 @@
 package com.youyouxi.github.creater.builder;
 
 import com.youyouxi.github.creater.entity.MysqlTable;
+import com.youyouxi.github.creater.entity.PersonalConfig;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ public interface DbBuilder {
     DbBuilder dataPool(String dataPool);
 
     DbBuilder table(String table);
+
+    DbBuilder personalConfig(PersonalConfig personalConfig);
 
     List<MysqlTable> execute();
 
