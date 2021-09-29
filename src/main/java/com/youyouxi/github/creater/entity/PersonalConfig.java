@@ -64,7 +64,7 @@ public class PersonalConfig implements Serializable {
         this.packageName = this.packageName == null ? "com.example" : this.packageName;
     }
 
-    private enum CreateCategory {
+    public enum CreateCategory {
         CREATE("create"),
         UPDATE("update"),
         ;

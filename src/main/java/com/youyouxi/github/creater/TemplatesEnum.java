@@ -16,23 +16,23 @@ public enum TemplatesEnum {
     /**
      * 模板地址
      */
-    private String template;
+    private String templatePath;
     /**
      * 后缀
      */
     private String suffix;
 
-    TemplatesEnum(String template, String suffix) {
-        this.template = template;
+    TemplatesEnum(String templatePath, String suffix) {
+        this.templatePath = templatePath;
         this.suffix = suffix;
     }
 
-    public String getTemplate() {
-        return template;
+    public String getTemplatePath() {
+        return templatePath;
     }
 
-    public void setTemplate(String template) {
-        this.template = template;
+    public void setTemplatePath(String templatePath) {
+        this.templatePath = templatePath;
     }
 
     public String getSuffix() {
@@ -42,5 +42,4 @@ public enum TemplatesEnum {
     public void setSuffix(String suffix) {
         this.suffix = suffix;
     }
-
 }

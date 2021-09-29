@@ -127,8 +127,8 @@ public class MysqlConcreteBuilder implements DbBuilder {
             List<MysqlTable> mysqlTables = new ArrayList<>(32);
             tableInfos.forEach(e -> {
                 MysqlTable mysqlTable = new MysqlTable();
+                List<MysqlTableInfoDetail> ary = new ArrayList<>(32);
                 tableInfoDetails.forEach(x -> {
-                    List<MysqlTableInfoDetail> ary = new ArrayList<>(32);
                     if (e.getTableName().equals(x.getTableName())) {
                         ary.add(x);
                     }
@@ -149,7 +149,6 @@ public class MysqlConcreteBuilder implements DbBuilder {
                 }
             }
 
-            LOGGER.info("查询数据库信息===" + mysqlTables);
             // 关闭数据库连接
             conn.close();
             // 执行生成代码操作

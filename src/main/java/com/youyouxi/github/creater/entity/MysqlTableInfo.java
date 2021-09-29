@@ -21,12 +21,12 @@ public class MysqlTableInfo implements Serializable {
     /**
      * 表名 驼峰
      */
-    private String tableName_aB;
+    private String tableNameHump;
 
     /**
-     * 表名 类名
+     * 表名 类名 Capitalize
      */
-    private String tableName_AB;
+    private String tableNameCapitalize;
 
     /**
      * 表描述
@@ -54,8 +54,8 @@ public class MysqlTableInfo implements Serializable {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
-        this.tableName_AB = Convert.convert_AB(tableName);
-        this.tableName_aB = Convert.convert_ab(tableName);
+        this.tableNameHump = Convert.convert_AB(tableName);
+        this.tableNameCapitalize = Convert.convert_ab(tableName);
     }
 
     public String getTableComment() {
@@ -90,20 +90,28 @@ public class MysqlTableInfo implements Serializable {
         this.columnCount = columnCount;
     }
 
-    public String getTableNameSmall_aB() {
-        return tableName_aB;
+    public String getTableNameHump() {
+        return tableNameHump;
     }
 
-    public String getTableNameSmall_AB() {
-        return tableName_AB;
+    public void setTableNameHump(String tableNameHump) {
+        this.tableNameHump = tableNameHump;
+    }
+
+    public String getTableNameCapitalize() {
+        return tableNameCapitalize;
+    }
+
+    public void setTableNameCapitalize(String tableNameCapitalize) {
+        this.tableNameCapitalize = tableNameCapitalize;
     }
 
     @Override
     public String toString() {
         return "MysqlTableInfo{" +
                 "tableName='" + tableName + '\'' +
-                ", tableName_aB='" + tableName_aB + '\'' +
-                ", tableName_AB='" + tableName_AB + '\'' +
+                ", tableNameHump='" + tableNameHump + '\'' +
+                ", tableNameCapitalize='" + tableNameCapitalize + '\'' +
                 ", tableComment='" + tableComment + '\'' +
                 ", tableCollation='" + tableCollation + '\'' +
                 ", engine='" + engine + '\'' +

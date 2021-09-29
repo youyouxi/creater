@@ -2,6 +2,7 @@ package com.youyouxi.github.creater;
 
 import com.youyouxi.github.creater.builder.impl.MysqlConcreteBuilder;
 import com.youyouxi.github.creater.entity.MysqlTable;
+import com.youyouxi.github.creater.entity.PersonalConfig;
 
 import java.util.List;
 
@@ -12,8 +13,13 @@ import java.util.List;
  */
 public class Welcome {
 
+
     public static void main(String[] args) {
         System.out.println("你好！");
+
+        PersonalConfig personalConfig = new PersonalConfig();
+        personalConfig.setCreatePath("/Users/chenjianbin/Documents/workspace_flybiner/creater/src/main/resources");
+        personalConfig.setCreateCategory(PersonalConfig.CreateCategory.CREATE.getCategory());
 
         List<MysqlTable> mysqlTables = new MysqlConcreteBuilder()
                 .diver("com.mysql.cj.jdbc.Driver")
@@ -23,6 +29,7 @@ public class Welcome {
                 .userName("root")
                 .password("cjb123456")
                 .type("mysql")
+                .personalConfig(personalConfig)
                 .execute();
 
     }
