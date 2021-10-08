@@ -6,9 +6,10 @@ import java.io.Serializable;
 
 /**
  * 数据库-详细信息
+ *
  * @author 内酷啦啦
  */
-public class MysqlTableInfoDetail implements Serializable{
+public class MysqlTableInfoDetail implements Serializable {
 
     private static final long serialVersionUID = -1679093642870165313L;
 
@@ -23,9 +24,14 @@ public class MysqlTableInfoDetail implements Serializable{
     private String columnName;
 
     /**
-     * 表字段-小写
+     * 表字段-小驼峰
      */
-    private String columnName_aB;
+    private String columnNameLowerCamelCase;
+
+    /**
+     * 表字段-大驼峰
+     */
+    private String columnNameUpperCamelCase;
 
     /**
      * 表字段序号
@@ -41,6 +47,11 @@ public class MysqlTableInfoDetail implements Serializable{
      * 字段类型
      */
     private String columnType;
+
+    /**
+     * 字段类型
+     */
+    private String columnJavaType;
 
     /**
      * 字段最大长度
@@ -71,11 +82,16 @@ public class MysqlTableInfoDetail implements Serializable{
 
     public void setColumnName(String columnName) {
         this.columnName = columnName;
-        this.columnName_aB = Convert.convert_ab(columnName);
+        this.columnNameLowerCamelCase = Convert.convertLowerCamelCase(columnName);
+        this.columnNameUpperCamelCase = Convert.convertUpperCamelCase(columnName);
     }
 
-    public String getColumnName_aB() {
-        return columnName_aB;
+    public String getColumnNameLowerCamelCase() {
+        return columnNameLowerCamelCase;
+    }
+
+    public String getColumnNameUpperCamelCase() {
+        return columnNameUpperCamelCase;
     }
 
     public String getOrdinalPosition() {
@@ -126,15 +142,25 @@ public class MysqlTableInfoDetail implements Serializable{
         this.columnKey = columnKey;
     }
 
+    public String getColumnJavaType() {
+        return columnJavaType;
+    }
+
+    public void setColumnJavaType(String columnJavaType) {
+        this.columnJavaType = columnJavaType;
+    }
+
     @Override
     public String toString() {
         return "MysqlTableInfoDetail{" +
                 "tableName='" + tableName + '\'' +
                 ", columnName='" + columnName + '\'' +
-                ", columnName_aB='" + columnName_aB + '\'' +
+                ", columnNameLowerCamelCase='" + columnNameLowerCamelCase + '\'' +
+                ", columnNameUpperCamelCase='" + columnNameUpperCamelCase + '\'' +
                 ", ordinalPosition='" + ordinalPosition + '\'' +
-                ", isNullAble=" + isNullAble +
+                ", isNullAble='" + isNullAble + '\'' +
                 ", columnType='" + columnType + '\'' +
+                ", columnJavaType='" + columnJavaType + '\'' +
                 ", columnLength=" + columnLength +
                 ", columnComment='" + columnComment + '\'' +
                 ", columnKey='" + columnKey + '\'' +

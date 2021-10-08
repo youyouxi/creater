@@ -19,14 +19,14 @@ public class MysqlTableInfo implements Serializable {
     private String tableName;
 
     /**
-     * 表名 驼峰
+     * 表名 小驼峰
      */
-    private String tableNameHump;
+    private String tableNameLowerCamelCase;
 
     /**
-     * 表名 类名 Capitalize
+     * 表名 类名 大驼峰
      */
-    private String tableNameCapitalize;
+    private String tableNameUpperCamelCase;
 
     /**
      * 表描述
@@ -54,8 +54,8 @@ public class MysqlTableInfo implements Serializable {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
-        this.tableNameHump = Convert.convert_AB(tableName);
-        this.tableNameCapitalize = Convert.convert_ab(tableName);
+        this.tableNameUpperCamelCase = Convert.convertUpperCamelCase(tableName);
+        this.tableNameLowerCamelCase = Convert.convertLowerCamelCase(tableName);
     }
 
     public String getTableComment() {
@@ -90,28 +90,20 @@ public class MysqlTableInfo implements Serializable {
         this.columnCount = columnCount;
     }
 
-    public String getTableNameHump() {
-        return tableNameHump;
+    public String getTableNameLowerCamelCase() {
+        return tableNameLowerCamelCase;
     }
 
-    public void setTableNameHump(String tableNameHump) {
-        this.tableNameHump = tableNameHump;
-    }
-
-    public String getTableNameCapitalize() {
-        return tableNameCapitalize;
-    }
-
-    public void setTableNameCapitalize(String tableNameCapitalize) {
-        this.tableNameCapitalize = tableNameCapitalize;
+    public String getTableNameUpperCamelCase() {
+        return tableNameUpperCamelCase;
     }
 
     @Override
     public String toString() {
         return "MysqlTableInfo{" +
                 "tableName='" + tableName + '\'' +
-                ", tableNameHump='" + tableNameHump + '\'' +
-                ", tableNameCapitalize='" + tableNameCapitalize + '\'' +
+                ", tableNameLowerCamelCase='" + tableNameLowerCamelCase + '\'' +
+                ", tableNameUpperCamelCase='" + tableNameUpperCamelCase + '\'' +
                 ", tableComment='" + tableComment + '\'' +
                 ", tableCollation='" + tableCollation + '\'' +
                 ", engine='" + engine + '\'' +

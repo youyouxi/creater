@@ -17,7 +17,21 @@ public class PersonalConfig implements Serializable {
 
     private String createPath;
 
+    private String createPathOfEntity;
+
+    private String createPathOfMapper;
+
+    private String createPathOfMapperBase;
+
+    private String createPathOfMapperBaseXml;
+
     private String packageName;
+
+    private String packageNameOfEntity;
+
+    private String packageNameOfMapper;
+
+    private String packageNameOfMapperBase;
 
     private String author;
 
@@ -51,6 +65,62 @@ public class PersonalConfig implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getPackageNameOfEntity() {
+        return packageNameOfEntity;
+    }
+
+    public void setPackageNameOfEntity(String packageNameOfEntity) {
+        this.packageNameOfEntity = packageNameOfEntity;
+    }
+
+    public String getPackageNameOfMapper() {
+        return packageNameOfMapper;
+    }
+
+    public void setPackageNameOfMapper(String packageNameOfMapper) {
+        this.packageNameOfMapper = packageNameOfMapper;
+    }
+
+    public String getPackageNameOfMapperBase() {
+        return packageNameOfMapperBase;
+    }
+
+    public void setPackageNameOfMapperBase(String packageNameOfMapperBase) {
+        this.packageNameOfMapperBase = packageNameOfMapperBase;
+    }
+
+    public String getCreatePathOfEntity() {
+        return createPathOfEntity;
+    }
+
+    public void setCreatePathOfEntity(String createPathOfEntity) {
+        this.createPathOfEntity = createPathOfEntity;
+    }
+
+    public String getCreatePathOfMapper() {
+        return createPathOfMapper;
+    }
+
+    public void setCreatePathOfMapper(String createPathOfMapper) {
+        this.createPathOfMapper = createPathOfMapper;
+    }
+
+    public String getCreatePathOfMapperBase() {
+        return createPathOfMapperBase;
+    }
+
+    public void setCreatePathOfMapperBase(String createPathOfMapperBase) {
+        this.createPathOfMapperBase = createPathOfMapperBase;
+    }
+
+    public String getCreatePathOfMapperBaseXml() {
+        return createPathOfMapperBaseXml;
+    }
+
+    public void setCreatePathOfMapperBaseXml(String createPathOfMapperBaseXml) {
+        this.createPathOfMapperBaseXml = createPathOfMapperBaseXml;
     }
 
     public void checkAndInit() {

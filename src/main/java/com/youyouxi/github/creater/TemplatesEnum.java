@@ -8,9 +8,9 @@ package com.youyouxi.github.creater;
 public enum TemplatesEnum {
 
     ENTITY("templates/entity.ftl", ".java"),
-    MAPPER("templates/mapper.ftl", ".java"),
-    MAPPER_BASE("templates/mapperBase.ftl", ".java"),
-    MAPPER_BASE_XML("templates/mapperBaseXml.ftl", ".java"),
+    MAPPER("templates/mapper.ftl", "Mapper.java"),
+    MAPPER_BASE("templates/mapperBase.ftl", "MapperBase.java"),
+    MAPPER_BASE_XML("templates/mapperBaseXml.ftl", ".xml"),
     ;
 
     /**

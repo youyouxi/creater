@@ -3,12 +3,12 @@ package com.youyouxi.github.creater.Utils;
 public class Convert {
 
     /**
-     * 字段转换 a_b -> AB 驼峰格式
+     * 字段转换 驼峰格式 大驼峰
      *
      * @param s 字符串
      * @return 字符串
      */
-    public static String convert_AB(String s) {
+    public static String convertUpperCamelCase(String s) {
         String split = "_";
         String[] names = s.split(split);
         StringBuilder stringBuilder = new StringBuilder("");
@@ -22,13 +22,13 @@ public class Convert {
     }
 
     /**
-     * 字段转换 a_b -> aB 驼峰格式
+     * 字段转换 驼峰格式 小驼峰
      *
      * @param s 字符串
      * @return 字符串
      */
-    public static String convert_ab(String s) {
-        String str = convert_AB(s);
+    public static String convertLowerCamelCase(String s) {
+        String str = convertUpperCamelCase(s);
         String a = str.substring(0, 1);
         String A = a.toLowerCase();
         return A + str.substring(1);
