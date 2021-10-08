@@ -23,11 +23,11 @@ public static void main(String[] args) {
 
     List<MysqlTable> mysqlTables = new MysqlConcreteBuilder()
             .diver("com.mysql.cj.jdbc.Driver")
-            .url("47.95.235.86")
+            .url("0.0.0.0")
             .port("3306")
             .dataPool("flybiner-user")
             .userName("root")
-            .password("cjb123456")
+            .password("0000")
             .type("mysql")
             .personalConfig(personalConfig)
             .execute();
