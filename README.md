@@ -1,10 +1,17 @@
 # create-code
 代码生成工具
 
-## 例子
+## 快速开始
+```
+<!-- https://mvnrepository.com/artifact/com.github.youyouxi/creater -->
+<dependency>
+    <groupId>com.github.youyouxi</groupId>
+    <artifactId>creater</artifactId>
+    <version>1.0.1</version>
+</dependency>
+```
 ```
 public static void main(String[] args) {
-    System.out.println("你好！");
 
     PersonalConfig personalConfig = new PersonalConfig();
     personalConfig.setCreatePath("/Users/chenjianbin/Documents/workspace_flybiner/creater/src/main/java/com/youyouxi/github/creater/temp");
@@ -19,6 +26,7 @@ public static void main(String[] args) {
     personalConfig.setPackageNameOfMapper("com.youyouxi.github.creater.temp.mapper");
     personalConfig.setPackageNameOfMapperBase("com.youyouxi.github.creater.temp.mapper");
 
+    // 创建 和 更新 两种方式
     personalConfig.setCreateCategory(PersonalConfig.CreateCategory.CREATE.getCategory());
 
     List<MysqlTable> mysqlTables = new MysqlConcreteBuilder()
