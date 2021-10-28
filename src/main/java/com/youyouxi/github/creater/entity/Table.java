@@ -3,33 +3,33 @@ package com.youyouxi.github.creater.entity;
 import java.io.Serializable;
 import java.util.List;
 
-public class MysqlTable implements Serializable {
+public class Table implements Serializable {
 
     private static final long serialVersionUID = -7741306487427192078L;
 
     /**
      * 表信息
      */
-    private MysqlTableInfo tableInfo;
+    private TableInfo tableInfo;
 
     /**
      * 表字段信息
      */
-    private List<MysqlTableInfoDetail> tableInfoDetails;
+    private List<TableInfoDetail> tableInfoDetails;
 
-    public MysqlTableInfo getTableInfo() {
+    public TableInfo getTableInfo() {
         return tableInfo;
     }
 
-    public void setTableInfo(MysqlTableInfo tableInfo) {
+    public void setTableInfo(TableInfo tableInfo) {
         this.tableInfo = tableInfo;
     }
 
-    public List<MysqlTableInfoDetail> getTableInfoDetails() {
+    public List<TableInfoDetail> getTableInfoDetails() {
         return tableInfoDetails;
     }
 
-    public void setTableInfoDetails(List<MysqlTableInfoDetail> tableInfoDetail) {
+    public void setTableInfoDetails(List<TableInfoDetail> tableInfoDetail) {
         this.tableInfoDetails = tableInfoDetail;
     }
 

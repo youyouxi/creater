@@ -1,5 +1,7 @@
 package com.youyouxi.github.creater.Utils;
 
+import com.mysql.cj.util.StringUtils;
+
 public class Convert {
 
     /**
@@ -13,10 +15,12 @@ public class Convert {
         String[] names = s.split(split);
         StringBuilder stringBuilder = new StringBuilder("");
         for (String str : names) {
-            String a = str.substring(0, 1);
-            String A = a.toUpperCase();
-            str = A + str.substring(1);
-            stringBuilder.append(str);
+            if (!StringUtils.isNullOrEmpty(str)){
+                String a = str.substring(0, 1);
+                String A = a.toUpperCase();
+                str = A + str.substring(1);
+                stringBuilder.append(str);
+            }
         }
         return stringBuilder.toString();
     }

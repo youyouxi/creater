@@ -1,5 +1,6 @@
 package com.youyouxi.github.creater.entity;
 
+import com.mysql.cj.util.StringUtils;
 import com.youyouxi.github.creater.Utils.Convert;
 
 import java.io.Serializable;
@@ -9,7 +10,7 @@ import java.io.Serializable;
  *
  * @author 内酷啦啦
  */
-public class MysqlTableInfoDetail implements Serializable {
+public class TableInfoDetail implements Serializable {
 
     private static final long serialVersionUID = -1679093642870165313L;
 
@@ -68,6 +69,11 @@ public class MysqlTableInfoDetail implements Serializable {
      */
     private String columnKey;
 
+    /**
+     * 是否显示 0-不显示 1-显示
+     */
+    private String isShow;
+
     public String getTableName() {
         return tableName;
     }
@@ -84,6 +90,14 @@ public class MysqlTableInfoDetail implements Serializable {
         this.columnName = columnName;
         this.columnNameLowerCamelCase = Convert.convertLowerCamelCase(columnName);
         this.columnNameUpperCamelCase = Convert.convertUpperCamelCase(columnName);
+    }
+
+    public void setColumnNameLowerCamelCase(String columnNameLowerCamelCase) {
+        this.columnNameLowerCamelCase = columnNameLowerCamelCase;
+    }
+
+    public void setColumnNameUpperCamelCase(String columnNameUpperCamelCase) {
+        this.columnNameUpperCamelCase = columnNameUpperCamelCase;
     }
 
     public String getColumnNameLowerCamelCase() {
@@ -150,6 +164,14 @@ public class MysqlTableInfoDetail implements Serializable {
         this.columnJavaType = columnJavaType;
     }
 
+    public String getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(String isShow) {
+        this.isShow = isShow;
+    }
+
     @Override
     public String toString() {
         return "MysqlTableInfoDetail{" +
@@ -167,10 +189,28 @@ public class MysqlTableInfoDetail implements Serializable {
                 '}';
     }
 
-    public static String selectSql(String table) {
+    public static String selectSqlForMysql(String table) {
         String str1 = "select * from information_schema.columns where table_schema = '";
         String str2 = "';";
         return str1 + table + str2;
+    }
+
+    public static String selectSqlForOracle(String table){
+        if (!StringUtils.isNullOrEmpty(table)) {
+            String str1 = "select * from user_tab_columns where Table_Name='";
+            String str2 = "'";
+            return str1 + table + str2;
+        }
+        return "select * from user_tab_columns";
+    }
+
+    public static String selectSqlColumnsCommentForOracle(String table){
+        if (!StringUtils.isNullOrEmpty(table)) {
+            String str1 = "select * from user_col_comments where Table_Name='";
+            String str2 = "'";
+            return str1 + table + str2;
+        }
+        return "select * from user_col_comments";
     }
 
 }

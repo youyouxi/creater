@@ -1,6 +1,6 @@
 package com.youyouxi.github.creater;
 
-import com.youyouxi.github.creater.builder.impl.MysqlConcreteBuilder;
+import com.youyouxi.github.creater.builder.impl.OracleConcreteBuilder;
 import com.youyouxi.github.creater.entity.Table;
 import com.youyouxi.github.creater.entity.PersonalConfig;
 
@@ -11,11 +11,10 @@ import java.util.List;
  *
  * @author youyouxi
  */
-public class Welcome {
+public class WelcomeOracle {
 
 
     public static void main(String[] args) {
-        System.out.println("你好！");
 
         PersonalConfig personalConfig = new PersonalConfig();
         personalConfig.setCreatePath("/Users/chenjianbin/Documents/workspace_flybiner/creater/src/main/java/com/youyouxi/github/creater/temp");
@@ -32,14 +31,15 @@ public class Welcome {
 
         personalConfig.setCreateCategory(PersonalConfig.CreateCategory.CREATE.getCategory());
 
-        List<Table> mysqlTables = new MysqlConcreteBuilder()
-                .diver("com.mysql.cj.jdbc.Driver")
-                .url("0.0.0.0")
-                .port("3306")
+        List<Table> oracleTable = new OracleConcreteBuilder()
+                .diver("oracle.jdbc.OracleDriver")
+                .url("10.60.44.70")
+                .port("1521")
                 .dataPool("flybiner-user")
-                .userName("root")
-                .password("0000")
-                .type("mysql")
+                .userName("ms_ats_dev")
+                .password("ms_ats_dev")
+                .type("ORCL")
+                .table("T_EI_BUSINESSES")
                 .personalConfig(personalConfig)
                 .execute();
 

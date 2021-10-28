@@ -1,5 +1,6 @@
 package com.youyouxi.github.creater.entity;
 
+import com.mysql.cj.util.StringUtils;
 import com.youyouxi.github.creater.Utils.Convert;
 
 import java.io.Serializable;
@@ -9,7 +10,7 @@ import java.io.Serializable;
  *
  * @author 内酷啦啦
  */
-public class MysqlTableInfo implements Serializable {
+public class TableInfo implements Serializable {
 
     private static final long serialVersionUID = 4573451077890603384L;
 
@@ -111,9 +112,33 @@ public class MysqlTableInfo implements Serializable {
                 '}';
     }
 
-    public static String selectSql(String table) {
+    /**
+     * 获取 mysql 表信息
+     * @param table 表名
+     * @return sql
+     */
+    public static String selectSqlForMysql(String table) {
         String str1 = "SELECT table_name,table_comment,table_collation,ENGINE FROM information_schema.TABLES WHERE table_schema='";
         String str2 = "';";
         return str1 + table + str2;
+    }
+
+    /**
+     * 获取 oracle 表信息
+     * @param table 表名
+     * @return sql
+     */
+    public static String selectSqlForOracle(String table) {
+        if (!StringUtils.isNullOrEmpty(table)) {
+            String str1 = "select * from user_tables WHERE TABLE_NAME = '";
+            String str2 = "'";
+            return str1 + table + str2;
+        }
+        return "select * from user_tables";
+    }
+
+    public static String selectSqlTableCommentForOracle(String table) {
+        // todo table 操作
+        return "select * from user_tab_comments";
     }
 }

@@ -102,32 +102,33 @@ public class MysqlConcreteBuilder implements DbBuilder {
         return this;
     }
 
-    public List<MysqlTable> execute() {
+    @Override
+    public List<Table> execute() {
         // 数据库 连接参数校验
         dbCreaterInfo.check();
         // 初始化 个性化配置
         personalConfig.checkAndInit();
         try {
-            String URL = dbCreaterInfo.getUrl() + dbCreaterInfo.getPort() + dbCreaterInfo.getDataPool() + S2;
-            String USER = dbCreaterInfo.getUserName();
-            String PASSWORD = dbCreaterInfo.getPassword();
+            String url = dbCreaterInfo.getUrl() + dbCreaterInfo.getPort() + dbCreaterInfo.getDataPool() + S2;
+            String user = dbCreaterInfo.getUserName();
+            String password = dbCreaterInfo.getPassword();
             // 加载驱动程序
             Class.forName(dbCreaterInfo.getDiver());
             // 获得数据库链接
-            Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            Connection conn = DriverManager.getConnection(url, user, password);
             // 查询数据库表信息 表信息
-            List<MysqlTableInfo> tableInfos = new ArrayList<>(32);
+            List<TableInfo> tableInfos = new ArrayList<>(32);
             getTableInfos(conn, tableInfos);
 
             // 查询数据库表信息 表字段信息
-            List<MysqlTableInfoDetail> tableInfoDetails = new ArrayList<>(32);
+            List<TableInfoDetail> tableInfoDetails = new ArrayList<>(32);
             getTableInfoDetails(conn, tableInfoDetails);
 
             // 获取 MysqlTable 信息
-            List<MysqlTable> mysqlTables = new ArrayList<>(32);
+            List<Table> mysqlTables = new ArrayList<>(32);
             tableInfos.forEach(e -> {
-                MysqlTable mysqlTable = new MysqlTable();
-                List<MysqlTableInfoDetail> ary = new ArrayList<>(32);
+                Table mysqlTable = new Table();
+                List<TableInfoDetail> ary = new ArrayList<>(32);
                 tableInfoDetails.forEach(x -> {
                     if (e.getTableName().equals(x.getTableName())) {
                         ary.add(x);
@@ -140,7 +141,7 @@ public class MysqlConcreteBuilder implements DbBuilder {
 
             // 过滤table信息
             if (!StringUtils.isNullOrEmpty(dbCreaterInfo.getTable())) {
-                for (MysqlTable e : mysqlTables){
+                for (Table e : mysqlTables) {
                     if (e.getTableInfo().getTableName().equals(dbCreaterInfo.getTable())) {
                         mysqlTables.clear();
                         mysqlTables.add(e);
@@ -152,20 +153,20 @@ public class MysqlConcreteBuilder implements DbBuilder {
             // 关闭数据库连接
             conn.close();
             // 执行生成代码操作
-            Creater.create(mysqlTables, personalConfig);
+            Creater.create(mysqlTables, personalConfig, dbCreaterInfo);
 
             return mysqlTables;
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("ClassNotFoundException SQLException", e);
         }
         throw new NullPointerException("数据库表信息为空");
     }
 
-    private void getTableInfoDetails(Connection conn, List<MysqlTableInfoDetail> tableInfoDetails) throws SQLException {
+    private void getTableInfoDetails(Connection conn, List<TableInfoDetail> tableInfoDetails) throws SQLException {
         Statement tableDetailSt = conn.createStatement();
-        ResultSet tableDetailRe = tableDetailSt.executeQuery(MysqlTableInfoDetail.selectSql(dbCreaterInfo.getDataPool()));
+        ResultSet tableDetailRe = tableDetailSt.executeQuery(TableInfoDetail.selectSqlForMysql(dbCreaterInfo.getDataPool()));
         while (tableDetailRe.next()) {
-            MysqlTableInfoDetail tableInfoDetail = new MysqlTableInfoDetail();
+            TableInfoDetail tableInfoDetail = new TableInfoDetail();
             tableInfoDetail.setTableName(tableDetailRe.getString("table_name"));
             tableInfoDetail.setColumnName(tableDetailRe.getString("column_name"));
             tableInfoDetail.setOrdinalPosition(tableDetailRe.getString("ordinal_position"));
@@ -178,11 +179,11 @@ public class MysqlConcreteBuilder implements DbBuilder {
         tableDetailRe.close();
     }
 
-    private void getTableInfos(Connection conn, List<MysqlTableInfo> tableInfos) throws SQLException {
+    private void getTableInfos(Connection conn, List<TableInfo> tableInfos) throws SQLException {
         Statement tableSt = conn.createStatement();
-        ResultSet tableRe = tableSt.executeQuery(MysqlTableInfo.selectSql(dbCreaterInfo.getDataPool()));
+        ResultSet tableRe = tableSt.executeQuery(TableInfo.selectSqlForMysql(dbCreaterInfo.getDataPool()));
         while (tableRe.next()) {
-            MysqlTableInfo tableInfo = new MysqlTableInfo();
+            TableInfo tableInfo = new TableInfo();
             tableInfo.setTableName(tableRe.getString("table_name"));
             tableInfo.setTableComment(tableRe.getString("table_comment"));
             tableInfo.setTableCollation(tableRe.getString("table_collation"));

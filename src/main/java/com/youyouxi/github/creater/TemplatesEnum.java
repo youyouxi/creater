@@ -7,10 +7,17 @@ package com.youyouxi.github.creater;
  */
 public enum TemplatesEnum {
 
+    /**
+     * 类别 通用
+     */
     ENTITY("templates/entity.ftl", ".java"),
     MAPPER("templates/mapper.ftl", "Mapper.java"),
     MAPPER_BASE("templates/mapperBase.ftl", "MapperBase.java"),
     MAPPER_BASE_XML("templates/mapperBaseXml.ftl", ".xml"),
+    /**
+     *
+     */
+    ENTITY_BR("templates/entityBr.ftl", ".java"),
     ;
 
     /**
