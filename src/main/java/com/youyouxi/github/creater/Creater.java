@@ -6,7 +6,6 @@ import com.youyouxi.github.creater.entity.DbCreaterInfo;
 import com.youyouxi.github.creater.entity.Table;
 import com.youyouxi.github.creater.entity.TableInfoDetail;
 import com.youyouxi.github.creater.entity.PersonalConfig;
-import freemarker.core.ParseException;
 import freemarker.template.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,17 +83,7 @@ public class Creater {
             root.put("javaPackage", javaPackage);
             root.put("personalConfig", personalConfig);
             template.process(root, out);
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        } catch (TemplateNotFoundException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (MalformedTemplateNameException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (TemplateException | IOException e) {
             e.printStackTrace();
         }
     }
